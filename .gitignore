@@ -1,0 +1,11 @@
+node_modules/
+dist/
+coverage/
+playwright-report/
+test-results/
+*.local
+*.tsbuildinfo
+.DS_Store
+Thumbs.db
+docs/demo/page@*.webm
+docs/demo/frame-*.png
