@@ -43,7 +43,7 @@
 
 ## 快速开始
 
-环境要求：Node.js ≥ 20.19，pnpm ≥ 9。
+环境要求：Node.js ≥ 22.12（推荐 24 LTS；Vite 8 本身支持 20.19+，但 Vitest 5 要求 22.12+），pnpm ≥ 9。
 
 ```bash
 pnpm install

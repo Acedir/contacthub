@@ -71,8 +71,8 @@ const html = `<!doctype html>
   body {
     margin: 0;
     width: 1240px;
-    height: 760px;
-    padding: 34px;
+    height: 540px;
+    padding: 30px;
     background:
       radial-gradient(circle at 82% 4%, rgba(220,232,173,.09), transparent 25%),
       #101d18;
@@ -224,7 +224,7 @@ await mkdir('docs/screenshots', { recursive: true })
 await writeFile('docs/git-history.html', html, 'utf8')
 
 const browser = await chromium.launch({ channel: 'msedge', headless: true })
-const page = await browser.newPage({ viewport: { width: 1240, height: 760 }, deviceScaleFactor: 1 })
+const page = await browser.newPage({ viewport: { width: 1240, height: 540 }, deviceScaleFactor: 1 })
 await page.setContent(html, { waitUntil: 'load' })
 await page.screenshot({ path: 'docs/screenshots/git-history.png' })
 await browser.close()

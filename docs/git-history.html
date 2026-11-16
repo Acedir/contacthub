@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    width: 1240px;
+    height: 540px;
+    padding: 30px;
+    background:
+      radial-gradient(circle at 82% 4%, rgba(220,232,173,.09), transparent 25%),
+      #101d18;
+    color: #e9e6d9;
+    font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+  }
+  .terminal {
+    height: 100%;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 18px;
+    background: #0b1713;
+    box-shadow: 0 30px 80px rgba(0,0,0,.38);
+  }
+  .titlebar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 44px;
+    padding: 0 18px;
+    border-bottom: 1px solid rgba(255,255,255,.07);
+    background: rgba(255,255,255,.035);
+  }
+  .dot-red, .dot-yellow, .dot-green { width: 10px; height: 10px; border-radius: 50%; }
+  .dot-red { background: #d96c58; }
+  .dot-yellow { background: #d8ad5e; }
+  .dot-green { background: #83a96f; }
+  .title {
+    margin-left: 8px;
+    color: rgba(239,237,226,.43);
+    font-family: "Cascadia Code", Consolas, monospace;
+    font-size: 11px;
+  }
+  .badge {
+    margin-left: auto;
+    padding: 4px 9px;
+    border: 1px solid rgba(220,232,173,.18);
+    border-radius: 6px;
+    background: rgba(220,232,173,.07);
+    color: #dce8ad;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .content { display: grid; grid-template-columns: minmax(0,1fr) 280px; height: calc(100% - 44px); }
+  .main { padding: 22px 24px 18px; border-right: 1px solid rgba(255,255,255,.07); }
+  .prompt { margin-bottom: 18px; font-family: "Cascadia Code", Consolas, monospace; font-size: 11px; color: rgba(239,237,226,.48); }
+  .prompt b { color: #dce8ad; font-weight: 500; }
+  .commit {
+    display: grid;
+    grid-template-columns: 22px 88px minmax(0,1fr) 90px;
+    align-items: center;
+    min-height: 47px;
+    border-bottom: 1px solid rgba(255,255,255,.045);
+  }
+  .rail { position: relative; align-self: stretch; display: flex; justify-content: center; }
+  .rail::before {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: rgba(220,232,173,.16);
+  }
+  .dot {
+    position: relative;
+    z-index: 1;
+    width: 9px; height: 9px;
+    margin-top: 19px;
+    border: 2px solid #0b1713;
+    border-radius: 50%;
+    background: #547d67;
+    box-shadow: 0 0 0 1px rgba(220,232,173,.32);
+  }
+  .dot.latest { background: #dce8ad; box-shadow: 0 0 12px rgba(220,232,173,.55); }
+  .date { color: rgba(239,237,226,.36); font-family: "Cascadia Code", Consolas, monospace; font-size: 10px; }
+  .subject { overflow: hidden; padding-right: 14px; color: rgba(250,248,240,.9); font-size: 11.5px; text-overflow: ellipsis; white-space: nowrap; }
+  .author { color: rgba(220,232,173,.45); font-family: "Cascadia Code", Consolas, monospace; font-size: 9px; text-align: right; }
+  .side { display: flex; flex-direction: column; padding: 22px 20px; background: rgba(255,255,255,.018); }
+  .side h2 {
+    margin: 0 0 5px;
+    color: rgba(250,248,240,.92);
+    font-family: Georgia, "Songti SC", serif;
+    font-size: 17px;
+  }
+  .side p { margin: 0 0 18px; color: rgba(239,237,226,.35); font-size: 9px; line-height: 1.6; }
+  .contributor { padding: 12px 0; border-top: 1px solid rgba(255,255,255,.06); }
+  .contributor-head { display: flex; align-items: center; gap: 7px; }
+  .avatar {
+    display: grid; width: 27px; height: 27px; place-items: center;
+    border-radius: 8px;
+    background: linear-gradient(135deg,#dce8ad,#6fae9c);
+    color: #123c32; font-weight: 800; font-size: 11px;
+  }
+  .contributor-head strong { color: rgba(250,248,240,.88); font-size: 11px; }
+  .count { margin-left: auto; color: rgba(220,232,173,.6); font-family: "Cascadia Code", Consolas, monospace; font-size: 8.5px; }
+  .bar { height: 5px; margin-top: 10px; overflow: hidden; border-radius: 99px; background: rgba(255,255,255,.06); }
+  .bar span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg,#7e9f6a,#dce8ad); }
+  .ratio { margin-top: 5px; color: rgba(239,237,226,.3); font-size: 8px; }
+  .command {
+    margin-top: auto;
+    padding: 11px 12px;
+    border: 1px solid rgba(255,255,255,.06);
+    border-radius: 8px;
+    background: rgba(0,0,0,.16);
+    color: rgba(239,237,226,.4);
+    font-family: "Cascadia Code", Consolas, monospace;
+    font-size: 8.5px;
+    line-height: 1.8;
+  }
+  .command b { color: #dce8ad; font-weight: 400; }
+  .foot {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 14px;
+    color: rgba(239,237,226,.22);
+    font-size: 8px;
+    letter-spacing: .05em;
+  }
+</style>
+</head>
+<body>
+  <div class="terminal">
+    <div class="titlebar">
+      <span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span>
+      <span class="title">acedir@luma: ~/contacthub — git log</span>
+      <span class="badge">LOCAL REPOSITORY</span>
+    </div>
+    <div class="content">
+      <div class="main">
+        <div class="prompt"><b>~/contacthub</b> $ git log --graph --pretty=format:'%ad  %s' --date=short</div>
+        
+      <div class="commit">
+        <div class="rail"><span class="dot latest"></span></div>
+        <div class="date">11-16 18:03</div>
+        <div class="subject">docs: add generated commit history visual</div>
+        <div class="author">Acedir</div>
+      </div>
+      <div class="commit">
+        <div class="rail"><span class="dot "></span></div>
+        <div class="date">11-16 18:03</div>
+        <div class="subject">docs: add course blog, rubric, deployment guide and CI</div>
+        <div class="author">Acedir</div>
+      </div>
+      <div class="commit">
+        <div class="rail"><span class="dot "></span></div>
+        <div class="date">11-16 18:03</div>
+        <div class="subject">test: add unit and browser coverage with demo assets</div>
+        <div class="author">Acedir</div>
+      </div>
+      <div class="commit">
+        <div class="rail"><span class="dot "></span></div>
+        <div class="date">11-16 18:03</div>
+        <div class="subject">feat: build responsive address book with bookmarks and multiple methods</div>
+        <div class="author">Acedir</div>
+      </div>
+      <div class="commit">
+        <div class="rail"><span class="dot "></span></div>
+        <div class="date">11-16 18:03</div>
+        <div class="subject">feat: add contact model, persistence and Excel data layer</div>
+        <div class="author">Acedir</div>
+      </div>
+      <div class="commit">
+        <div class="rail"><span class="dot "></span></div>
+        <div class="date">11-16 18:03</div>
+        <div class="subject">chore: scaffold Vite React TypeScript project</div>
+        <div class="author">Acedir</div>
+      </div>
+      </div>
+      <div class="side">
+        <h2>Contributors</h2>
+        <p>提交统计来自本地 Git 历史。推送到 GitHub 后，可替换为 Insights 页面截图。</p>
+        
+      <div class="contributor">
+        <div class="contributor-head">
+          <span class="avatar">A</span>
+          <strong>Acedir</strong>
+          <span class="count">6 commits</span>
+        </div>
+        <div class="bar"><span style="width:100%"></span></div>
+        <div class="ratio">100% of all commits</div>
+      </div>
+        <div class="command">
+          <div>$ <b>git shortlog -sn --all</b></div>
+          <div>6&nbsp;&nbsp;Acedir</div>
+        </div>
+        <div class="foot"><span>6 COMMITS</span><span>1 CONTRIBUTOR</span></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
