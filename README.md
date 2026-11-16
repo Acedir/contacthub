@@ -13,13 +13,13 @@
 
 拾光通讯录是软件工程（FZU–MU）课程作业的个人项目。它面向“重要的人不应该淹没在通讯录里”这一场景，提供收藏、搜索、标签、多联系方式管理和 Excel 双向流转。应用是纯前端 SPA，所有数据保存在浏览器 `localStorage`，不依赖后端即可运行。
 
-- **目标仓库地址（发布后生效）**：`https://github.com/Acedir/contacthub`
+**作者**：郑博为（832302218）
+
+- **GitHub 仓库**：`https://github.com/Acedir/contacthub`
+- **公网访问地址**：`https://acedir.github.io/contacthub/`
 - **本地访问地址**：`http://127.0.0.1:4173`
-- **公网演示**：可选加分项暂未部署，仓库内提供了 Docker / Render / Nginx 部署配置
 - **运行视频**：[docs/demo/contacthub-demo.webm](docs/demo/contacthub-demo.webm)
 - **博客**：[docs/blog.md](docs/blog.md)
-
-> 如果 GitHub 用户名不是 `Acedir`，请在发布后替换 README、博客和 `docs/DEPLOYMENT.md` 中的仓库链接。
 
 ## 功能对照
 
@@ -30,7 +30,7 @@
 | Excel 导出（25 分） | 每位联系人独立一行；姓名、公司等基础信息独立列；每种联系方式按“标签 + 值”动态扩展列；带表头样式、冻结窗格、筛选、说明 Sheet |
 | Excel 导入（25 分） | 表头别名识别、数据预览、跳过无效行、合并 / 追加两种策略、模板下载 |
 | 页面样式（10 分） | 完整设计系统、响应式布局、动效、空状态、Toast、移动端底部导航 |
-| 云部署（可选 15 分） | 未部署公网环境；提供一键 Docker、Render 与 Nginx 配置 |
+| 云部署（可选 15 分） | 已部署 GitHub Pages：`https://acedir.github.io/contacthub/`；同时提供 Docker / Render / Nginx 配置 |
 
 ## 技术栈
 
@@ -135,6 +135,19 @@ E2E 使用真实 Microsoft Edge（Playwright `channel: 'msedge'`），覆盖桌�
 
 ## 部署
 
+### GitHub Pages（当前线上版本）
+
+公网地址：<https://acedir.github.io/contacthub/>
+
+构建使用相对资源路径（`base: './'`），因此同一份 `dist` 可以部署在根域名或 `/contacthub/` 子路径。当前 `gh-pages` 分支保存构建产物，`main` 分支保存源码与文档。
+
+更新线上版本：
+
+```bash
+pnpm build
+# 将 dist/ 内容提交到 gh-pages 分支并推送
+```
+
 ### Docker
 
 ```bash
@@ -150,7 +163,7 @@ docker run --rm -p 8080:80 luma-contacts
 3. Render 会读取 `render.yaml`；构建命令为 `corepack enable && pnpm install --frozen-lockfile && pnpm build`，发布目录 `dist`。
 4. 设置 SPA rewrite：`/* -> /index.html`。
 
-> 注意：云部署是作业的可选加分项。本项目未使用任何个人云账号，因此没有公网地址；配置已准备好，拥有账号后可在 5 分钟内完成部署。
+> 线上版本已部署在 GitHub Pages；Docker / Render / Nginx 配置保留，便于迁移到云服务器或自建主机。
 
 ## 文档
 

@@ -3083,6 +3083,12 @@ kbd {
   }
 }
 
+@media (max-width: 960px) {
+  .topbar-title {
+    display: none;
+  }
+}
+
 @media (max-width: 780px) {
   .topbar {
     flex-wrap: wrap;

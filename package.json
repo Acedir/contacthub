@@ -20,7 +20,7 @@
     "excel",
     "software-engineering"
   ],
-  "author": "Acedir",
+  "author": "郑博为",
   "license": "MIT",
   "dependencies": {
     "exceljs": "^4.4.0",

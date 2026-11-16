@@ -1,30 +1,25 @@
 # 部署与 GitHub 发布指南
 
-本项目是纯静态 SPA，构建产物在 `dist/`，不需要数据库或 API。以下步骤任选一种即可。
+本项目是纯静态 SPA，构建产物在 `dist/`，不需要数据库或 API。当前已部署到 GitHub Pages：
 
-## 0. 推送到 GitHub
+- **线上地址**：<https://acedir.github.io/contacthub/>
+- **仓库**：<https://github.com/Acedir/contacthub>
 
-当前目录已经是本地 Git 仓库。先在 GitHub 创建空仓库（不要勾选 README / .gitignore），然后：
+以下步骤可用于重新发布、迁移到云服务器或自建主机。
+
+## 0. GitHub 仓库与 Pages
+
+当前仓库已推送 `main` 分支与 `v1.0.0` 标签，`gh-pages` 分支保存构建产物。线上版本由 GitHub Pages 从 `gh-pages` 分支提供。
+
+远端配置：
 
 ```bash
-git remote add origin https://github.com/<your-username>/contacthub.git
-git branch -M main
+git remote set-url origin https://github.com/Acedir/contacthub.git
 git push -u origin main
+pnpm build
 ```
 
-如果使用 SSH：
-
-```bash
-git remote add origin git@github.com:<your-username>/contacthub.git
-git push -u origin main
-```
-
-推送后：
-
-1. 打开仓库 **Insights → Contributors** 截图；
-2. 打开 **Commits** 页面截图；
-3. 用这两张图替换 `docs/screenshots/git-history.png`，并按实际用户名更新 README、`docs/blog.md` 中的 `<https://github.com/Acedir/contacthub>`；
-4. 如果希望保留本地历史截图，可将 GitHub 截图另存为 `docs/screenshots/github-history.png`，在博客中增加一段“GitHub 提交记录”。
+然后把 `dist/` 内容提交到 `gh-pages` 分支并推送，在仓库 Settings → Pages 选择 `gh-pages` 分支。`vite.config.ts` 使用 `base: './'`，因此同一份构建既能在根路径运行，也能在 `/contacthub/` 子路径运行。
 
 ## 1. Docker（推荐自建服务器）
 
@@ -64,18 +59,33 @@ sudo nginx -t
 sudo systemctl reload nginx
 ```
 
-## 4. GitHub Pages（可选）
+## 4. GitHub Pages（当前方案）
 
-纯静态项目可以发布到 GitHub Pages：
+线上地址：<https://acedir.github.io/contacthub/>
 
-1. 在仓库 Settings → Pages 中选择 **GitHub Actions**。
-2. 添加一个构建并部署 `dist` 的 workflow（本项目未内置，因为课程主要要求可运行仓库 + 博客）。
-3. 注意 Vite 的 `base`：如果部署在 `https://<user>.github.io/contacthub/`，需要把 `vite.config.ts` 的 `base` 改为 `'/contacthub/'`。
+当前 `gh-pages` 分支保存 `dist/` 构建产物。发布更新：
+
+```bash
+pnpm install
+pnpm build
+
+# 在一个临时 worktree 中更新 gh-pages
+git worktree add ../contacthub-pages gh-pages
+cp -R dist/* ../contacthub-pages/
+cd ../contacthub-pages
+git add -A
+git commit -m "deploy: update GitHub Pages"
+git push origin gh-pages
+cd ../contacthub
+git worktree remove ../contacthub-pages
+```
+
+Vite 使用相对路径 `base: './'`，无需把资源路径写死为 `/contacthub/`；同一份构建也可以直接部署到根域名。
 
 ## 5. 验收公网部署
 
 ```bash
-curl -I https://<your-domain>/
+curl -I https://acedir.github.io/contacthub/
 ```
 
 应返回 `200`，并且页面能：

@@ -7,17 +7,18 @@
 | Item | Content |
 | --- | --- |
 | Course for This Assignment | Software Engineering (FZU–MU) |
-| Team Name | 拾光 · 个人项目（Acedir） |
+| Team Name | 拾光 · 个人项目（郑博为 832302218） |
 | Assignment Requirements | 实现通讯录的书签收藏、多种联系方式、Excel 导入导出；建立 GitHub 仓库（≥ 3 次提交）、发布博客并录制完整运行视频；云端部署为可选加分项 |
 | Objectives of This Assignment | 完整体验需求分析、模块设计、编码、测试、文档和部署流程；练习 Git 提交规范、React 状态建模、文件导入导出和响应式界面设计 |
 | Other References | React 19 文档、Vite 8 文档、ExcelJS 文档、MDN Web Storage、WCAG 2.2、课程课件 |
 
 **项目地址**
 
-- GitHub 仓库（发布后生效）：<https://github.com/Acedir/contacthub>
+- GitHub 仓库：<https://github.com/Acedir/contacthub>
+- **公网访问地址：<https://acedir.github.io/contacthub/>**（GitHub Pages）
 - 本地访问地址：<http://127.0.0.1:4173>
 - 完整运行视频：[contacthub-demo.webm](demo/contacthub-demo.webm)（WebM，约 42 秒）
-- 博客与源码同仓库维护；如果 GitHub 用户名不是 `Acedir`，发布时请替换仓库链接。
+- 博客与源码同仓库维护。
 
 **目录**
 
@@ -75,6 +76,7 @@
 | Excel 导出 | 带样式、冻结窗格、自动筛选、说明 Sheet，可直接再次导入 |
 | Excel 导入 | 预览、校验、跳过无效行、按姓名智能合并或全部追加、模板下载 |
 | 响应式 | 桌面三列 / 平板两列 / 手机单列，移动端底部导航 |
+| 部署 | GitHub Pages 公网静态托管，构建使用相对路径以适配 `/contacthub/` 子路径 |
 | 本地优先 | 全部数据保存在 `localStorage`，无需登录和后端 |
 
 **技术栈**
@@ -317,6 +319,12 @@ const haystack = [
 
 ![移动端首页](screenshots/mobile-home.png)
 
+### 4.7 公网部署（GitHub Pages）
+
+![GitHub Pages 线上页面](screenshots/deployed-site.png)
+
+公网地址：<https://acedir.github.io/contacthub/>
+
 ## 5. 完整运行视频
 
 视频录制了完整操作链路：**首页 → 收藏并筛选 → 新建含 2 个电话和 2 个邮箱的联系人 → 搜索并查看详情 → 导出 Excel → 导入预览与合并 → 查看导入结果**。
@@ -334,16 +342,18 @@ const haystack = [
 
 ## 6. GitHub 提交记录与贡献统计
 
-> 说明：本地仓库已经完成多阶段提交。由于 GitHub 仓库需要由本人账号创建，本图展示的是推送前的本地 Git 历史；完成 `git push` 后，建议将下图替换为 GitHub 仓库 **Insights → Contributors** 与 **Commits** 页面截图，链接仍为 <https://github.com/Acedir/contacthub>。
+仓库已公开发布：<https://github.com/Acedir/contacthub>。以下截图来自 GitHub 的 **Commits** 页面与仓库首页的 **Contributors** 区域。
 
-![Git 提交历史](screenshots/git-history.png)
+![GitHub Commits 页面：7 次提交](screenshots/github-commits.png)
+
+![GitHub 仓库首页：7 Commits / Contributors 1](screenshots/github-repository.png)
 
 **贡献统计**
 
 | Contributor | Commits | 贡献比例 |
 | --- | ---: | ---: |
-| Acedir | 6 | 100% |
-| **合计** | **6** | **100%** |
+| 郑博为（GitHub: Acedir） | 7 | 100% |
+| **合计** | **7** | **100%** |
 
 对应命令：
 
@@ -352,15 +362,22 @@ git log --oneline --graph --decorate
 git shortlog -sn --all
 ```
 
+<details>
+<summary>本地 Git 提交图（补充）</summary>
+
+![本地 Git 提交历史](screenshots/git-history.png)
+
+</details>
+
 提交按“脚手架 → 数据层 → 界面 → Excel → 测试与资产 → 文档 → 可视化记录”拆分，保证每次提交有明确主题，而不是最后一次性上传全部代码。
 
 ## 7. 分工与贡献比例
 
-本项目为**个人项目**，从需求分析、界面设计、编码、测试、文档到部署配置均由 Acedir 完成。
+本项目为**个人项目**，从需求分析、界面设计、编码、测试、文档到部署配置均由郑博为完成。
 
 | 成员 | 主要工作 | 贡献比例 |
 | --- | --- | ---: |
-| Acedir | 需求与模块设计、React 页面与状态管理、书签与多联系方式、Excel 导入导出、响应式样式、单元/E2E 测试、博客、截图与视频、部署配置 | 100% |
+| 郑博为 | 需求与模块设计、React 页面与状态管理、书签与多联系方式、Excel 导入导出、响应式样式、单元/E2E 测试、博客、截图与视频、部署配置 | 100% |
 | **合计** |  | **100%** |
 
 如果后续改为小组协作，建议按以下边界拆分，减少冲突：
@@ -422,6 +439,8 @@ git shortlog -sn --all
 
 ## 9. PSP 表
 
+**学生**：郑博为（832302218）
+
 | 阶段 | 预估时间（min） | 实际时间（min） | 说明 |
 | --- | ---: | ---: | --- |
 | Planning | 30 | 35 | 阅读作业要求，列出评分点和验收清单 |
@@ -431,7 +450,7 @@ git shortlog -sn --all
 | Code Review | 40 | 35 | 自查边界条件、重复代码、可访问性 |
 | Testing | 80 | 90 | Vitest 单测、Playwright E2E、手工浏览器检查 |
 | Documentation | 110 | 160 | README、博客、截图、视频、部署文档 |
-| Deployment | 30 | 20 | Docker / Nginx / Render 配置；未使用云账号 |
+| Deployment | 30 | 20 | GitHub Pages 发布、Docker / Nginx / Render 配置 |
 | **合计** | **715** | **845** | 约 14 小时 |
 
 > 表中“实际时间”按本次开发过程的阶段投入记录，包含环境准备与素材录制。
@@ -472,16 +491,17 @@ pnpm build        ✅ 生产构建通过
 
 | 评分项 | 分值 | 实现与证据 | 自评 |
 | --- | ---: | --- | ---: |
-| 博客 Markdown、GitHub 链接与代码规范链接 | 10 | 本文使用 Markdown；仓库地址、目录、代码结构、运行方式齐全 | 9–10（待推送） |
+| 博客 Markdown、GitHub 链接与代码规范链接 | 10 | 本文使用 Markdown；GitHub 仓库已公开，目录、代码结构、运行方式齐全 | 10 |
 | 功能实现思路、截图、分工 | 20 | 第 3、4、7 节；首页/详情/表单/导入/移动端截图 | 20 |
 | 页面样式 | 10 | 设计系统、响应式、动效、空状态、移动端导航 | 10 |
 | 收藏联系人 | 25 | 星标、收藏视图、计数、持久化、E2E 用例 | 25 |
 | 多种联系方式 | 10 | 四类方法、不限条数、标签用途、去重、详情分组 | 10 |
 | 导入与导出 | 25 | 动态列 Excel、样式、说明页、预览、合并/追加、模板、往返测试 | 25 |
-| 云部署（可选） | +15 | 未使用个人云账号；Docker/Render/Nginx 配置已准备 | 0 |
-| **基础合计** | **100** |  | **99–100** |
+| 云部署（可选） | +15 | GitHub Pages 公网部署：<https://acedir.github.io/contacthub/> | 15 |
+| **基础合计** | **100** |  | **100** |
+| **含可选加分总计** | **115** |  | **115** |
 
-> 诚实说明：GitHub 仓库和公网部署都需要本人账号授权。本仓库已完成本地 Git 历史和部署配置，但当前环境没有账号凭据，因此没有伪造“已发布”的链接。推送后请替换博客中的仓库截图，并可将自评的 9–10 分补满。
+> 说明：GitHub 仓库已发布（7 次提交，1 位贡献者）；线上环境使用 GitHub Pages 静态托管，手机和电脑均可通过公网地址访问。
 
 ## 11. 部署说明
 
@@ -517,6 +537,14 @@ docker run --rm -p 8080:80 luma-contacts
 - 换浏览器或清理缓存后数据不会自动同步；
 - 需要迁移时使用「导出 Excel」，在新设备「导入 Excel」即可。
 
+### 11.5 GitHub Pages（当前线上环境）
+
+- 公网地址：<https://acedir.github.io/contacthub/>
+- 托管方式：GitHub Pages 静态托管，`gh-pages` 分支保存 `dist` 构建产物
+- 构建适配：`vite.config.ts` 使用 `base: './'`，同一份构建可运行在 `/contacthub/` 子路径
+- 源码与文档：`main` 分支；每次发版后在本地执行 `pnpm build` 并更新 `gh-pages` 分支
+- 已验证：线上首页 9 位示例联系人、收藏筛选、Excel 导出、390×844 移动端均正常，控制台无错误
+
 ## 12. 提交清单
 
 - [x] 功能：收藏联系人
@@ -529,9 +557,8 @@ docker run --rm -p 8080:80 luma-contacts
 - [x] 完整运行视频
 - [x] 博客：作业说明、目录、实现思路、截图、视频、Git 记录、分工、贡献率、难点、PSP
 - [x] 部署配置（Docker / Render / Nginx）
-- [ ] GitHub 公网仓库推送
-- [ ] 云端公网访问地址（可选加分）
-- [ ] 用真实姓名/学号替换 `Acedir`，并补充课程要求的个人信息
+- [x] GitHub 公网仓库推送
+- [x] 云端公网访问地址（GitHub Pages）
 
 ## 13. 参考资料
 
@@ -545,5 +572,5 @@ docker run --rm -p 8080:80 luma-contacts
 
 ---
 
-**博客作者**：Acedir（个人项目）  
-**最后更新**：2026-11-16
+**博客作者**：郑博为（832302218）  
+**最后更新**：2026-11-17

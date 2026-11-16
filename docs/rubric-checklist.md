@@ -7,7 +7,7 @@
 | 检查项 | 分值 | 状态 | 证据 |
 | --- | ---: | --- | --- |
 | 博客使用 Markdown | 10 | ✅ | `docs/blog.md`，含元信息表、目录、代码块、表格、图片、视频链接 |
-| 正确的 GitHub 仓库链接 | 10 | ⚠️ 待推送 | 目标地址 `https://github.com/Acedir/contacthub`；推送后替换截图与链接 |
+| 正确的 GitHub 仓库链接 | 10 | ✅ | 已公开：`https://github.com/Acedir/contacthub` |
 | 代码规范链接 / 目录结构 | 10 | ✅ | README「目录结构」「设计要点」；TypeScript strict；组件与 lib 分层 |
 | 功能实现思路 | 20 | ✅ | 博客第 3 节，含数据模型、导出列规则、导入合并策略 |
 | 程序截图 | 20 | ✅ | `docs/screenshots/` 首页、详情、表单、导入、收藏、移动端 |
@@ -22,18 +22,18 @@
 | 多种联系方式 | 10 | ✅ | 4 类方法 × 不限条数 × 用途标签；去重；详情分组；E2E 用例 2 |
 | Excel 导出 | 25 | ✅ | 一人一行、基础列独立、联系方式动态扩展列、样式、说明 Sheet、自动筛选 |
 | Excel 导入 | 25 | ✅ | 别名表头、预览、校验、合并/追加、模板、错误提示；单测 + E2E |
-| 云端部署（可选） | +15 | ⚠️ 未完成 | 无个人云账号；Docker / Render / Nginx 配置已准备 |
+| 云端部署（可选） | +15 | ✅ | GitHub Pages 公网：`https://acedir.github.io/contacthub/` |
 
 ## 作业流程要求
 
 | 要求 | 状态 | 说明 |
 | --- | --- | --- |
-| 建立 GitHub 仓库，提交 ≥ 3 次 | ⚠️ 本地 6 次，待推送 | 本地历史完整；推送后满足 |
+| 建立 GitHub 仓库，提交 ≥ 3 次 | ✅ 已推送 7 次 | `https://github.com/Acedir/contacthub` |
 | 代码可构建 | ✅ | `pnpm install && pnpm build` |
-| 博客按时提交 | ✅ 内容完成 | 2026-11-16 完成，早于 11-17 截止 |
+| 博客按时提交 | ✅ 内容完成 | 2026-11-17 完成，早于 11-17 23:59 截止 |
 | 博客发布后审核 | ⚠️ 待平台发布 | 发布后留出审核时间 |
 | 完整运行视频 | ✅ | `docs/demo/contacthub-demo.webm`，约 42 秒 |
-| 截图 GitHub 提交历史 + 贡献统计 | ⚠️ 本地截图 | `docs/screenshots/git-history.png`；推送后替换为 GitHub Insights |
+| 截图 GitHub 提交历史 + 贡献统计 | ✅ | `docs/screenshots/github-commits.png`、`github-repository.png`；7 Commits / 1 Contributor |
 | 成员贡献比例合计 100 | ✅ | 个人 100% |
 
 ## 验收命令
@@ -59,5 +59,5 @@ Vite: built successfully
 1. 数据存储在浏览器 `localStorage`，不跨设备同步；通过 Excel 迁移。
 2. 导入按姓名智能合并；同名不同人会被合并，可改用“全部追加”。
 3. 单次导入最多读取 5000 行；仅支持 `.xlsx` / `.xlsm`。
-4. 未部署公网环境，不虚报云端加分。
-5. GitHub 仓库需本人账号创建后推送；当前仓库已可直接 push。
+4. 已部署 GitHub Pages（静态云托管）；Docker / Render 配置保留，可迁移到云服务器。
+5. GitHub 仓库已发布；如果仓库迁移，请同步更新 README、博客与部署文档中的链接。
