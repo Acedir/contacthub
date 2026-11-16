@@ -1,0 +1,181 @@
+import type { Contact, ContactMethod, MethodKind } from '../types'
+
+function method(
+  id: string,
+  kind: MethodKind,
+  label: string,
+  value: string,
+): ContactMethod {
+  return { id, kind, label, value }
+}
+
+const updated = (day: string, hour = 10) => `2026-11-${day}T${String(hour).padStart(2, '0')}:24:00.000Z`
+
+/**
+ * Demo data is intentionally fictional. It only seeds a fresh browser so the
+ * interface can be reviewed without preparing a spreadsheet first.
+ */
+export function seedContacts(): Contact[] {
+  return [
+    {
+      id: 'seed_lin_zhixia',
+      name: '林知夏',
+      company: '木棉设计',
+      title: '产品设计师',
+      birthday: '1995-04-18',
+      favorite: true,
+      methods: [
+        method('seed_m_lin_1', 'phone', '手机', '138 0000 1024'),
+        method('seed_m_lin_2', 'phone', '工作室', '021-6888 1024'),
+        method('seed_m_lin_3', 'email', '个人', 'zhixia.lin@example.com'),
+        method('seed_m_lin_4', 'social', '微信', 'linzhixia_design'),
+        method('seed_m_lin_5', 'address', '工作室', '上海市静安区愚园路 1088 号 3F'),
+      ],
+      tags: ['朋友', '设计'],
+      notes: '喜欢手冲咖啡；约稿前先发需求简报。',
+      createdAt: '2026-09-18T02:20:00.000Z',
+      updatedAt: updated('15', 9),
+    },
+    {
+      id: 'seed_chen_yu',
+      name: '陈屿',
+      company: '星野科技',
+      title: '前端工程师',
+      birthday: '1993-12-02',
+      favorite: true,
+      methods: [
+        method('seed_m_chen_1', 'phone', '手机', '139 0000 2048'),
+        method('seed_m_chen_2', 'email', '工作', 'yu.chen@example.com'),
+        method('seed_m_chen_3', 'social', 'GitHub', 'github.com/chenyu-dev'),
+        method('seed_m_chen_4', 'address', '公司', '杭州市余杭区文一西路 969 号'),
+      ],
+      tags: ['工作', '技术'],
+      notes: '前端架构问题可以找他，周三下午通常有空。',
+      createdAt: '2026-08-02T06:00:00.000Z',
+      updatedAt: updated('14', 16),
+    },
+    {
+      id: 'seed_su_wan',
+      name: '苏晚',
+      company: '晚风工作室',
+      title: '品牌主理人',
+      birthday: '1994-07-21',
+      favorite: true,
+      methods: [
+        method('seed_m_su_1', 'phone', '手机', '137 0000 3072'),
+        method('seed_m_su_2', 'email', '工作', 'wan.su@example.com'),
+        method('seed_m_su_3', 'social', '小红书', '@晚风与 Brand'),
+        method('seed_m_su_4', 'address', '工作室', '厦门市思明区沙坡尾 12 号'),
+      ],
+      tags: ['客户', '品牌'],
+      notes: '新品牌视觉项目对接人，偏好微信语音沟通。',
+      createdAt: '2026-10-01T03:10:00.000Z',
+      updatedAt: updated('12', 11),
+    },
+    {
+      id: 'seed_zhou_yuan',
+      name: '周予安',
+      company: '青岚资本',
+      title: '投资经理',
+      birthday: '1991-02-09',
+      favorite: false,
+      methods: [
+        method('seed_m_zhou_1', 'phone', '工作', '021-6600 8899'),
+        method('seed_m_zhou_2', 'email', '工作', 'yuan.zhou@example.com'),
+        method('seed_m_zhou_3', 'social', 'LinkedIn', 'linkedin.com/in/zhouyuan'),
+        method('seed_m_zhou_4', 'address', '公司', '上海市浦东新区世纪大道 100 号'),
+      ],
+      tags: ['工作', '投资'],
+      notes: '每季度同步一次项目进展；邮件回复最快。',
+      createdAt: '2026-06-12T09:30:00.000Z',
+      updatedAt: updated('10', 15),
+    },
+    {
+      id: 'seed_gu_yan',
+      name: '顾言',
+      company: '自由职业',
+      title: '摄影师',
+      birthday: '1996-10-30',
+      favorite: false,
+      methods: [
+        method('seed_m_gu_1', 'phone', '手机', '136 0000 4096'),
+        method('seed_m_gu_2', 'email', '个人', 'yan.gu@example.com'),
+        method('seed_m_gu_3', 'social', '微博', '@顾言的光'),
+      ],
+      tags: ['朋友', '摄影'],
+      notes: '十一月下旬有档期，适合拍室外自然光。',
+      createdAt: '2026-07-08T12:44:00.000Z',
+      updatedAt: updated('8', 13),
+    },
+    {
+      id: 'seed_shen_xinghe',
+      name: '沈星河',
+      company: '复旦大学',
+      title: '研究生',
+      birthday: '1999-05-15',
+      favorite: false,
+      methods: [
+        method('seed_m_shen_1', 'phone', '手机', '135 0000 5120'),
+        method('seed_m_shen_2', 'email', '学校', 'xinghe.shen@example.com'),
+        method('seed_m_shen_3', 'social', '微信', 'shen_xinghe'),
+      ],
+      tags: ['同学', '朋友'],
+      notes: '本科同学，现在在做城市计算方向的研究。',
+      createdAt: '2026-03-16T04:00:00.000Z',
+      updatedAt: updated('5', 19),
+    },
+    {
+      id: 'seed_tang_ning',
+      name: '唐宁',
+      company: '云杉软件',
+      title: '客户成功经理',
+      birthday: '1992-08-08',
+      favorite: false,
+      methods: [
+        method('seed_m_tang_1', 'phone', '工作', '010-5888 6021'),
+        method('seed_m_tang_2', 'email', '工作', 'ning.tang@example.com'),
+        method('seed_m_tang_3', 'social', '飞书', '唐宁 · 云杉软件'),
+        method('seed_m_tang_4', 'address', '公司', '北京市海淀区中关村南大街 5 号'),
+      ],
+      tags: ['客户', '工作'],
+      notes: '续约事宜联系她；每周五下午例会。',
+      createdAt: '2026-05-20T08:15:00.000Z',
+      updatedAt: updated('2', 10),
+    },
+    {
+      id: 'seed_liang_chen',
+      name: '梁辰',
+      company: '仁和医院',
+      title: '主治医师',
+      birthday: '1988-11-11',
+      favorite: false,
+      methods: [
+        method('seed_m_liang_1', 'phone', '手机', '133 0000 7411'),
+        method('seed_m_liang_2', 'email', '工作', 'chen.liang@example.com'),
+        method('seed_m_liang_3', 'address', '医院', '南京市鼓楼区中山路 321 号'),
+      ],
+      tags: ['医疗', '生活'],
+      notes: '家人的复诊联系人，挂号前先短信确认。',
+      createdAt: '2026-01-11T01:30:00.000Z',
+      updatedAt: '2026-10-28T07:10:00.000Z',
+    },
+    {
+      id: 'seed_xu_mo',
+      name: '许墨',
+      company: '独立书店「岛屿」',
+      title: '店主',
+      birthday: '1990-03-27',
+      favorite: false,
+      methods: [
+        method('seed_m_xu_1', 'phone', '书店', '0592-220 1180'),
+        method('seed_m_xu_2', 'email', '个人', 'mo.xu@example.com'),
+        method('seed_m_xu_3', 'social', '微信', 'island_books'),
+        method('seed_m_xu_4', 'address', '书店', '厦门市思明区大学路 48 号'),
+      ],
+      tags: ['朋友', '生活'],
+      notes: '每月最后一个周六有读书会，可以带朋友。',
+      createdAt: '2026-04-04T11:20:00.000Z',
+      updatedAt: '2026-10-24T09:45:00.000Z',
+    },
+  ]
+}
