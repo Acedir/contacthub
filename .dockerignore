@@ -1,0 +1,9 @@
+node_modules
+dist
+coverage
+test-results
+playwright-report
+.git
+.gitignore
+docs/demo/page@*.webm
+*.log
